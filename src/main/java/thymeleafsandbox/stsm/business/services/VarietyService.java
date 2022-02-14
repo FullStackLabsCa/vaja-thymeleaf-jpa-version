@@ -22,6 +22,9 @@ package thymeleafsandbox.stsm.business.services;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.persistence.PrePersist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thymeleafsandbox.stsm.business.entities.Variety;
@@ -32,7 +35,7 @@ public class VarietyService {
     
     @Autowired
     private VarietyRepository varietyRepository;
-    
+
     
     public VarietyService() {
         super();
@@ -45,12 +48,36 @@ public class VarietyService {
     }
 
     public Variety findById(final Integer id) {
-        Optional<Variety> byId = Optional.ofNullable(this.varietyRepository.findById(id));
+        Optional<Variety> byId = this.varietyRepository.findById(id);
         if(byId==null){
             throw new RuntimeException();
         }
 
         return byId.get();
     }
-    
+
+    public void saveValues(){
+        if(varietyRepository.findAll().isEmpty()){
+            final Variety var1 = new Variety();
+            var1.setName("Thymus vulgaris");
+            varietyRepository.save(var1);
+            final Variety var2 = new Variety();
+            var2.setName("Thymus x citriodorus");
+            varietyRepository.save(var2);
+            final Variety var3 = new Variety();
+            var3.setName("Thymus herba-barona");
+            varietyRepository.save(var3);
+            final Variety var4 = new Variety();
+            var4.setName("Thymus pseudolaginosus");
+            varietyRepository.save(var4);
+            final Variety var5 = new Variety();
+            var5.setName("Thymus serpyllum");
+            varietyRepository.save(var5);
+        }
+    }
+
+    @PostConstruct
+    public void saveFirst(){
+            saveValues();
+    }
 }

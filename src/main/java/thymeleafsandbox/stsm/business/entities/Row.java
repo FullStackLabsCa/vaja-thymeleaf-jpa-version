@@ -17,7 +17,8 @@ public class Row {
     private Integer rowId;
 
 
-    @Column(name = "VARIETY")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "VARIETY_ID")
     private Variety variety = null;
 
     @Column(name="SEEDS_PER_CELL")

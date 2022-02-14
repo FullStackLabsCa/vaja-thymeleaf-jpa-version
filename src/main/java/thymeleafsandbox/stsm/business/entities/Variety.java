@@ -30,6 +30,8 @@ import java.io.Serializable;
 @Data
 @Getter
 @Setter
+@Entity
+@Table(name = "VARIETY")
 public class Variety implements Serializable {
 
     @Id
@@ -39,7 +41,6 @@ public class Variety implements Serializable {
 
     @Column(name = "NAME")
     private String name = null;
-    
 
     public Variety(String name) {
         this.name=name;
