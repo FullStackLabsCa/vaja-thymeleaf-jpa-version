@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Optional;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
-import jakarta.persistence.PrePersist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thymeleafsandbox.stsm.business.entities.Variety;

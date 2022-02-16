@@ -1,23 +1,24 @@
 /*
  * =============================================================================
- * 
+ *
  *   Copyright (c) 2011-2016, The THYMELEAF team (http://www.thymeleaf.org)
- * 
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
- * 
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *   Unless required by applicable law or agreed to in writing, software
  *   distributed under the License is distributed on an "AS IS" BASIS,
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- * 
+ *
  * =============================================================================
  */
 package thymeleafsandbox.stsm.business.entities;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,7 @@ import java.util.*;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "SEED_STARTERSS")
 public class SeedStarter {
 
@@ -36,10 +38,10 @@ public class SeedStarter {
     @Column(name = "ID")
     private Integer id = null;
 
-    @Column(name="DATE_PLANTED")
+    @Column(name = "DATE_PLANTED")
     private Date datePlanted = null;
 
-    @Column(name="COVERED")
+    @Column(name = "COVERED")
     private Boolean covered = null;
 
     @Column(name = "TYPE")

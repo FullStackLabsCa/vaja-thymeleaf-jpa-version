@@ -18,11 +18,8 @@
  * =============================================================================
  */
 package thymeleafsandbox.stsm.business.entities;
-
-
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.io.Serializable;
 
 @AllArgsConstructor
