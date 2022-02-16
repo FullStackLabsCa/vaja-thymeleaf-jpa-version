@@ -1,4 +1,4 @@
-package thymeleafsandbox.stsm.business.entities;
+package thymeleafsandbox.stsm.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

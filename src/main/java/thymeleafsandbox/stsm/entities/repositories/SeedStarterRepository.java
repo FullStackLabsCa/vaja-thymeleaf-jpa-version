@@ -17,31 +17,14 @@
  * 
  * =============================================================================
  */
-package thymeleafsandbox.stsm.business.entities;
-import jakarta.persistence.*;
-import lombok.*;
-import java.io.Serializable;
+package thymeleafsandbox.stsm.entities.repositories;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Getter
-@Setter
-@Entity
-@Table(name = "VARIETY")
-public class Variety implements Serializable {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import thymeleafsandbox.stsm.entities.SeedStarter;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "VARIETY_ID")
-    private Integer id = null;
 
-    @Column(name = "NAME")
-    private String name = null;
+@Repository
+public interface SeedStarterRepository extends JpaRepository<SeedStarter,Integer> {
 
-    public Variety(String name) {
-        this.name=name;
-    }
-
-    
 }

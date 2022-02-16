@@ -17,32 +17,14 @@
  * 
  * =============================================================================
  */
-package thymeleafsandbox.stsm.business.entities.repositories;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.springframework.beans.factory.annotation.Autowired;
+package thymeleafsandbox.stsm.entities.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import thymeleafsandbox.stsm.business.entities.*;
-import thymeleafsandbox.stsm.web.conversion.DateFormatter;
+import thymeleafsandbox.stsm.entities.Variety;
 
 
 @Repository
-public interface SeedStarterRepository extends JpaRepository<SeedStarter,Integer> {
+public interface VarietyRepository extends JpaRepository<Variety,Integer> {
 
+    
 }

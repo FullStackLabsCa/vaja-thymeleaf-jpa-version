@@ -5,10 +5,11 @@ import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import thymeleafsandbox.stsm.business.entities.Feature;
-import thymeleafsandbox.stsm.business.entities.SeedStarter;
-import thymeleafsandbox.stsm.business.entities.repositories.SeedStarterRepository;
-import thymeleafsandbox.stsm.business.services.SeedStarterService;
+import thymeleafsandbox.stsm.entities.Feature;
+import thymeleafsandbox.stsm.entities.SeedStarter;
+import thymeleafsandbox.stsm.entities.repositories.SeedStarterRepository;
+import thymeleafsandbox.stsm.services.SeedStarterService;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

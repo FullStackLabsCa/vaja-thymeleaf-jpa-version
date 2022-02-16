@@ -17,14 +17,33 @@
  * 
  * =============================================================================
  */
-package thymeleafsandbox.stsm.business.entities.repositories;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import thymeleafsandbox.stsm.business.entities.Variety;
+package thymeleafsandbox.stsm.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import thymeleafsandbox.stsm.entities.SeedStarter;
+import thymeleafsandbox.stsm.entities.repositories.SeedStarterRepository;
+
+@Service
+public class SeedStarterService {
+    
+    @Autowired
+    private SeedStarterRepository seedstarterRepository;
+
+    public SeedStarterService() {
+        super();
+    }
+
+    
+    public List<SeedStarter> findAll() {
+        return this.seedstarterRepository.findAll();
+    }
 
 
-@Repository
-public interface VarietyRepository extends JpaRepository<Variety,Integer> {
-
+    public SeedStarter add(final SeedStarter seedStarter) {
+       return this.seedstarterRepository.save(seedStarter);
+    }
     
 }

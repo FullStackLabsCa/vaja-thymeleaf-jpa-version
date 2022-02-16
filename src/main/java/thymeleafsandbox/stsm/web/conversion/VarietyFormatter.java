@@ -24,8 +24,8 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
-import thymeleafsandbox.stsm.business.entities.Variety;
-import thymeleafsandbox.stsm.business.services.VarietyService;
+import thymeleafsandbox.stsm.entities.Variety;
+import thymeleafsandbox.stsm.services.VarietyService;
 
 
 public class VarietyFormatter implements Formatter<Variety> {
