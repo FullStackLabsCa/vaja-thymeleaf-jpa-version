@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thymeleafsandbox.stsm.business.entities.SeedStarter;
 import thymeleafsandbox.stsm.business.entities.repositories.SeedStarterRepository;
-import thymeleafsandbox.stsm.web.conversion.DateFormatter;
 
 @Service
 public class SeedStarterService {
@@ -39,11 +38,11 @@ public class SeedStarterService {
 
     
     public List<SeedStarter> findAll() {
-        return this.seedstarterRepository.findAll();
+        return this.seedstarterRepository.findAllSeedStarter();
     }
 
     public void add(final SeedStarter seedStarter) {
-        this.seedstarterRepository.save(seedStarter);
+        this.seedstarterRepository.add(seedStarter);
     }
     
 }

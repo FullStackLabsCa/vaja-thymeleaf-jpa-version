@@ -32,12 +32,9 @@ import java.io.Serializable;
 @Setter
 public class Variety implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "VARIETY_ID")
+
     private Integer id = null;
 
-    @Column(name = "NAME")
     private String name = null;
     
 

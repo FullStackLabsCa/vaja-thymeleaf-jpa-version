@@ -105,9 +105,7 @@ public class SeedStarterMngController {
         this.seedStarterService.add(seedStarter);
         return "redirect:/seedstartermng";
     }
-    
 
-    
     @RequestMapping(value="/seedstartermng", params={"addRow"})
     public String addRow(final SeedStarter seedStarter, final BindingResult bindingResult) {
         seedStarter.getRows().add(new Row());
@@ -123,6 +121,4 @@ public class SeedStarterMngController {
         seedStarter.getRows().remove(rowId.intValue());
         return "seedstartermng";
     }
-
-
 }

@@ -18,7 +18,6 @@
  * =============================================================================
  */
 package thymeleafsandbox.stsm.business.entities;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.*;
@@ -27,33 +26,18 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-@Table(name = "SEED_STARTERSS")
 public class SeedStarter {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Integer id = null;
 
-    @Column(name="DATE_PLANTED")
     private Date datePlanted = null;
 
-    @Column(name="COVERED")
     private Boolean covered = null;
 
-    @Column(name = "TYPE")
-    @Enumerated(EnumType.STRING)
     private Type type = Type.PLASTIC;
 
-    @ElementCollection(targetClass = Feature.class)
-    @JoinTable(name = "FEATURES", joinColumns = @JoinColumn(name = "ID"))
-    @Column(name = "FEATURE_TYPE", nullable = false)
-    @Enumerated(EnumType.STRING)
-    Collection<Feature> features;
+    Feature[] features;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID")
     private List<Row> rows = new ArrayList<Row>();
 
 }
