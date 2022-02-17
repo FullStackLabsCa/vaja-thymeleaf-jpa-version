@@ -88,10 +88,15 @@ public class SeedStarterRepository {
             seedStarter.setCovered(rs.getBoolean("covered"));
             seedStarter.setType(Type.valueOf((rs.getString("type"))));
             String features = rs.getString("features");
-            Feature[] features1 = Stream.of(features.split(",")).map(Feature::valueOf).toArray(Feature[]::new);
-            seedStarter.setFeatures(features1);
-            seedStarter.setRows(rowDataRepository.getAllRows(seedStarter.getId()));
-            return seedStarter;
+           if(features.equals("")){
+               Feature[] features1 = {};
+               seedStarter.setFeatures(features1);
+           }else {
+               Feature[] features1 = Stream.of(features.split(",")).map(Feature::valueOf).toArray(Feature[]::new);
+               seedStarter.setFeatures(features1);
+           }
+               seedStarter.setRows(rowDataRepository.getAllRows(seedStarter.getId()));
+               return seedStarter;
         };
         return jdbcTemplate.query(SEED_DETAILS, rowMapper);
     }
