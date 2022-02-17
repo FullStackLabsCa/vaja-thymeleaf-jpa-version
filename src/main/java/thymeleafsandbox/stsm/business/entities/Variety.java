@@ -29,6 +29,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "VARIETY")
+@Builder
 public class Variety implements Serializable {
 
     @Id
