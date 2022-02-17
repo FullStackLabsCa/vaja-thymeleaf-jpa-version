@@ -42,7 +42,7 @@ public class SeedStarterService {
     }
 
     public void add(final SeedStarter seedStarter) {
-        this.seedstarterRepository.add(seedStarter);
+        this.seedstarterRepository.save(seedStarter);
     }
     
 }

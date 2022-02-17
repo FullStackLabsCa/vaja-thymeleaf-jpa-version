@@ -20,16 +20,14 @@
 package thymeleafsandbox.stsm.business.entities.repositories;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -45,10 +43,8 @@ public class SeedStarterRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    private static final String INSERT_QUERY = "INSERT INTO seed_details (datePlanted, covered, type, features) values(?,?,?,?) ";
-    private static final String GET_ALL_SEED_QUERY = "SELECT * FROM seed_details";
-    private static final String GET_SEED__BY_ID_QUERY = "SELECT * FROM seed_details WHERE seedId = ?";
-
+    private static final String INSERT_INTO_SEED_DETAILS = "INSERT INTO seed_details (datePlanted, covered, type, features) values(?,?,?,?) ";
+    private static final String SEED_DETAILS = "SELECT * FROM seed_details";
     @Autowired
     RowDataRepository rowDataRepository ;
 
@@ -56,17 +52,16 @@ public class SeedStarterRepository {
         super();
     }
 
-    public void add(final SeedStarter seedStarter) {
+    public void save(final SeedStarter seedStarter) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         PreparedStatementCreator preparedStatementCreator = con -> {
-            PreparedStatement preparedStatement = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = con.prepareStatement(INSERT_INTO_SEED_DETAILS, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, seedStarter.getDatePlanted().toString());
             preparedStatement.setBoolean(2, seedStarter.getCovered());
             preparedStatement.setString(3, String.valueOf(seedStarter.getType().toString()));
             preparedStatement.setString(4, Arrays.stream(seedStarter.getFeatures())
                     .map(Feature::toString)
-                    .reduce((n1, n2) -> n1 + "," + n2)
-                    .orElse(null));
+                    .collect(Collectors.joining(",")));
             return preparedStatement;
         };
 
@@ -76,7 +71,7 @@ public class SeedStarterRepository {
         key.ifPresent(number -> seedStarter.setId(number.intValue()));
 
         int id = keyHolder.getKey().intValue();
-        rowDataRepository.saveRowData(seedStarter.getRows(), id);
+        rowDataRepository.saveRow(seedStarter.getRows(), id);
     }
 
 
@@ -92,12 +87,11 @@ public class SeedStarterRepository {
             }
             seedStarter.setCovered(rs.getBoolean("covered"));
             seedStarter.setType(Type.valueOf((rs.getString("type"))));
-            seedStarter.setFeatures(Arrays.stream(rs.getString("features").split(","))
-                    .map(Feature::valueOf)
-                    .toArray(Feature[]::new));
-            seedStarter.setRows(rowDataRepository.getAllRowData(seedStarter.getId()));
+            String features = rs.getString("features");
+            Feature[] features1 = Stream.of(features.split(",")).map(Feature::valueOf).toArray(Feature[]::new);
+            seedStarter.setRows(rowDataRepository.getAllRows(seedStarter.getId()));
             return seedStarter;
         };
-        return jdbcTemplate.query(GET_ALL_SEED_QUERY, rowMapper);
+        return jdbcTemplate.query(SEED_DETAILS, rowMapper);
     }
 }

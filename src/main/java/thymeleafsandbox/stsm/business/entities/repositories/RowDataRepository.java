@@ -20,14 +20,14 @@ public class RowDataRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    private static final String INSERT_ROW_DATA = "INSERT INTO rows_details (variety, number, seeds) VALUES (?,?,?)";
-    private static final String GET_ROW_DATA = "SELECT * FROM rows_details WHERE number = ?";
+    private static final String ROW_VALUES = "INSERT INTO rows_details (variety, number, seeds) VALUES (?,?,?)";
+    private static final String ROWS_DETAILS_WHERE_NUMBER = "SELECT * FROM rows_details WHERE number = ?";
 
-    public void saveRowData(List<Row> rowData, Integer seedId) {
+    public void saveRow(List<Row> rowData, Integer seedId) {
         for (Row row : rowData) {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             PreparedStatementCreator preparedStatementCreator = con -> {
-                PreparedStatement preparedStatement = con.prepareStatement(INSERT_ROW_DATA, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement preparedStatement = con.prepareStatement(ROW_VALUES, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, row.getVariety().getName());
                 preparedStatement.setInt(2, seedId);
                 preparedStatement.setInt(3, row.getSeedsPerCell());
@@ -37,13 +37,13 @@ public class RowDataRepository {
         }
     }
 
-    public List<Row> getAllRowData(Integer seedId) {
+    public List<Row> getAllRows(Integer seedId) {
         RowMapper<Row> rowMapper = (resultSet, i) -> {
             Row row = new Row();
             row.setVariety(new Variety(1, resultSet.getString("variety")));
             row.setSeedsPerCell(resultSet.getInt("seeds"));
             return row;
         };
-        return jdbcTemplate.query(GET_ROW_DATA, rowMapper, seedId);
+        return jdbcTemplate.query(ROWS_DETAILS_WHERE_NUMBER, rowMapper, seedId);
     }
 }
