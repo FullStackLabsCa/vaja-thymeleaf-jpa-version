@@ -41,8 +41,8 @@ public class SeedStarterService {
         return this.seedstarterRepository.findAllSeedStarter();
     }
 
-    public void add(final SeedStarter seedStarter) {
-        this.seedstarterRepository.save(seedStarter);
+    public SeedStarter add(final SeedStarter seedStarter) {
+       return this.seedstarterRepository.save(seedStarter);
     }
     
 }
