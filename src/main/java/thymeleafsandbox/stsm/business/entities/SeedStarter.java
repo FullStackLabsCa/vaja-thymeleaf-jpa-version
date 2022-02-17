@@ -17,7 +17,7 @@
  *
  * =============================================================================
  */
-package thymeleafsandbox.stsm.entities;
+package thymeleafsandbox.stsm.business.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -17,14 +17,14 @@
  * 
  * =============================================================================
  */
-package thymeleafsandbox.stsm.entities.repositories;
+package thymeleafsandbox.stsm.business.entities.repositories;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import thymeleafsandbox.stsm.entities.Variety;
+import thymeleafsandbox.stsm.business.entities.SeedStarter;
 
 
 @Repository
-public interface VarietyRepository extends JpaRepository<Variety,Integer> {
+public interface SeedStarterRepository extends JpaRepository<SeedStarter,Integer> {
 
-    
 }

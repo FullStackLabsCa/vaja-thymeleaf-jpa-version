@@ -5,16 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import thymeleafsandbox.stsm.entities.Feature;
-import thymeleafsandbox.stsm.entities.SeedStarter;
-import thymeleafsandbox.stsm.entities.Type;
-import thymeleafsandbox.stsm.entities.Variety;
-import thymeleafsandbox.stsm.services.SeedStarterService;
-import thymeleafsandbox.stsm.services.VarietyService;
+import thymeleafsandbox.stsm.business.entities.Feature;
+import thymeleafsandbox.stsm.business.entities.SeedStarter;
+import thymeleafsandbox.stsm.business.entities.Type;
+import thymeleafsandbox.stsm.business.entities.Variety;
+import thymeleafsandbox.stsm.business.services.SeedStarterService;
+import thymeleafsandbox.stsm.business.services.VarietyService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +41,7 @@ public class SeedStarterControllerTest {
 
     @Test
     @SneakyThrows
-    public void methodOne() {
+    public void seedStarterHomePage() {
 
         BDDMockito.given(seedStarterService.findAll()).willReturn(seedStartersList);
         BDDMockito.given(varietyService.findAll()).willReturn(listVariety);

@@ -29,13 +29,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import thymeleafsandbox.stsm.entities.Feature;
-import thymeleafsandbox.stsm.entities.Row;
-import thymeleafsandbox.stsm.entities.SeedStarter;
-import thymeleafsandbox.stsm.entities.Type;
-import thymeleafsandbox.stsm.entities.Variety;
-import thymeleafsandbox.stsm.services.SeedStarterService;
-import thymeleafsandbox.stsm.services.VarietyService;
+import thymeleafsandbox.stsm.business.entities.Feature;
+import thymeleafsandbox.stsm.business.entities.Row;
+import thymeleafsandbox.stsm.business.entities.SeedStarter;
+import thymeleafsandbox.stsm.business.entities.Type;
+import thymeleafsandbox.stsm.business.entities.Variety;
+import thymeleafsandbox.stsm.business.services.SeedStarterService;
+import thymeleafsandbox.stsm.business.services.VarietyService;
 
 
 @Controller

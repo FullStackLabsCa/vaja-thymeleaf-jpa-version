@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package thymeleafsandbox.stsm.services;
+package thymeleafsandbox.stsm.business.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +25,8 @@ import java.util.Optional;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import thymeleafsandbox.stsm.entities.Variety;
-import thymeleafsandbox.stsm.entities.repositories.VarietyRepository;
+import thymeleafsandbox.stsm.business.entities.Variety;
+import thymeleafsandbox.stsm.business.entities.repositories.VarietyRepository;
 
 @Service
 public class VarietyService {
