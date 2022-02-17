@@ -89,6 +89,7 @@ public class SeedStarterRepository {
             seedStarter.setType(Type.valueOf((rs.getString("type"))));
             String features = rs.getString("features");
             Feature[] features1 = Stream.of(features.split(",")).map(Feature::valueOf).toArray(Feature[]::new);
+            seedStarter.setFeatures(features1);
             seedStarter.setRows(rowDataRepository.getAllRows(seedStarter.getId()));
             return seedStarter;
         };
