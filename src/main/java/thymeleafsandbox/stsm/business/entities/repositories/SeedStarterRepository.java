@@ -1,20 +1,20 @@
 /*
  * =============================================================================
- * 
+ *
  *   Copyright (c) 2011-2016, The THYMELEAF team (http://www.thymeleaf.org)
- * 
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
- * 
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *   Unless required by applicable law or agreed to in writing, software
  *   distributed under the License is distributed on an "AS IS" BASIS,
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- * 
+ *
  * =============================================================================
  */
 package thymeleafsandbox.stsm.business.entities.repositories;
@@ -34,7 +34,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import thymeleafsandbox.stsm.business.entities.*;
+import thymeleafsandbox.stsm.business.entities.Feature;
+import thymeleafsandbox.stsm.business.entities.SeedStarter;
+import thymeleafsandbox.stsm.business.entities.Type;
 
 
 @Repository
@@ -45,14 +47,15 @@ public class SeedStarterRepository {
 
     private static final String INSERT_INTO_SEED_DETAILS = "INSERT INTO seed_details (datePlanted, covered, type, features) values(?,?,?,?) ";
     private static final String SEED_DETAILS = "SELECT * FROM seed_details";
+
     @Autowired
-    RowDataRepository rowDataRepository ;
+    RowDataRepository rowDataRepository;
 
     public SeedStarterRepository() {
         super();
     }
 
-    public void save(final SeedStarter seedStarter) {
+    public SeedStarter save(final SeedStarter seedStarter) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         PreparedStatementCreator preparedStatementCreator = con -> {
             PreparedStatement preparedStatement = con.prepareStatement(INSERT_INTO_SEED_DETAILS, Statement.RETURN_GENERATED_KEYS);
@@ -72,11 +75,12 @@ public class SeedStarterRepository {
 
         int id = keyHolder.getKey().intValue();
         rowDataRepository.saveRow(seedStarter.getRows(), id);
+        return seedStarter;
     }
 
 
-    public List<SeedStarter> findAllSeedStarter(){
-        RowMapper<SeedStarter> rowMapper= (rs, rowNum) -> {
+    public List<SeedStarter> findAllSeedStarter() {
+        RowMapper<SeedStarter> rowMapper = (rs, rowNum) -> {
             SeedStarter seedStarter = new SeedStarter();
             seedStarter.setId(rs.getInt("seedId"));
             try {
@@ -88,15 +92,15 @@ public class SeedStarterRepository {
             seedStarter.setCovered(rs.getBoolean("covered"));
             seedStarter.setType(Type.valueOf((rs.getString("type"))));
             String features = rs.getString("features");
-           if(features.equals("")){
-               Feature[] features1 = {};
-               seedStarter.setFeatures(features1);
-           }else {
-               Feature[] features1 = Stream.of(features.split(",")).map(Feature::valueOf).toArray(Feature[]::new);
-               seedStarter.setFeatures(features1);
-           }
-               seedStarter.setRows(rowDataRepository.getAllRows(seedStarter.getId()));
-               return seedStarter;
+            if (features.equals("")) {
+                Feature[] features1 = {};
+                seedStarter.setFeatures(features1);
+            } else {
+                Feature[] features1 = Stream.of(features.split(",")).map(Feature::valueOf).toArray(Feature[]::new);
+                seedStarter.setFeatures(features1);
+            }
+            seedStarter.setRows(rowDataRepository.getAllRows(seedStarter.getId()));
+            return seedStarter;
         };
         return jdbcTemplate.query(SEED_DETAILS, rowMapper);
     }

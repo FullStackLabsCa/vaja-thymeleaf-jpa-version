@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package thymeleafsandbox.stsm.web.controller;
+package thymeleafsandbox.stsm.business.web.controller;
 
 import java.util.Arrays;
 import java.util.Calendar;

@@ -24,6 +24,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,5 +43,16 @@ public class Variety implements Serializable {
         this.name=name;
     }
 
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Variety variety = (Variety) o;
+        return Objects.equals(id, variety.id) && Objects.equals(name, variety.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
 }

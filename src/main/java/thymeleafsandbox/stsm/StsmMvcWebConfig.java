@@ -22,8 +22,8 @@ package thymeleafsandbox.stsm;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import thymeleafsandbox.stsm.web.conversion.DateFormatter;
-import thymeleafsandbox.stsm.web.conversion.VarietyFormatter;
+import thymeleafsandbox.stsm.business.web.conversion.DateFormatter;
+import thymeleafsandbox.stsm.business.web.conversion.VarietyFormatter;
 
 @Configuration
 public class StsmMvcWebConfig {

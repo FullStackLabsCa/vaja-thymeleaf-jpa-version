@@ -20,6 +20,9 @@ public class RowDataRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    VarietyRepository varietyRepository;
+
     private static final String ROW_VALUES = "INSERT INTO rows_details (variety, number, seeds) VALUES (?,?,?)";
     private static final String ROWS_DETAILS_WHERE_NUMBER = "SELECT * FROM rows_details WHERE number = ?";
 
@@ -40,10 +43,15 @@ public class RowDataRepository {
     public List<Row> getAllRows(Integer seedId) {
         RowMapper<Row> rowMapper = (resultSet, i) -> {
             Row row = new Row();
-            row.setVariety(new Variety(1, resultSet.getString("variety")));
+            String variety = resultSet.getString("variety");
+            row.setVariety(findIdByName(variety));
             row.setSeedsPerCell(resultSet.getInt("seeds"));
             return row;
         };
         return jdbcTemplate.query(ROWS_DETAILS_WHERE_NUMBER, rowMapper, seedId);
+    }
+
+    public Variety findIdByName(String name) {
+        return varietyRepository.findAll().stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 }

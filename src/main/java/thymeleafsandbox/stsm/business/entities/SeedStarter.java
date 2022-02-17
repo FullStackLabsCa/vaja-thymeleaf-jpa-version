@@ -26,6 +26,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class SeedStarter {
 
     private Integer id = null;
@@ -40,4 +41,18 @@ public class SeedStarter {
 
     private List<Row> rows = new ArrayList<Row>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SeedStarter that = (SeedStarter) o;
+        return Objects.equals(id, that.id) && Objects.equals(datePlanted, that.datePlanted) && Objects.equals(covered, that.covered) && type == that.type && Arrays.equals(features, that.features) && Objects.equals(rows, that.rows);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, datePlanted, covered, type, rows);
+        result = 31 * result + Arrays.hashCode(features);
+        return result;
+    }
 }
